@@ -2,30 +2,89 @@
 * Java 1.8/1.11/1.15
 * Maven
 
+# Problem Statement 
+
+    It was on App Signal Coding Platform
+    Design a system which stores and manages different types of campaigns.
+
+    There can be 2 types of campaign
+
+    Communication campaign
+    Ad Campaign
+    For this problem, we'll only focus on building communication campaigns, but the campaign is expected to be extensible in future for any other types of campaign.
+
+    In any campaign, there should be campaignId, name, description etc
+
+    The communication campaign will have a list of communications to be sent.
+    A communication can be sent to the following channels
+
+    SMS - Here, only a message is enough.
+            EMAIL - In this, mail subject and actual message is required.
+    For any campaign, order of sending communication is important i.e few communication needs to be sent before other communications.
+    For example:
+    Assume there are 4 communications (Let's say - A, B, C, D)
+            A -> B
+    B -> C
+    A -> C
+    Here few conclusions can be made
+
+    D is independent, so it can be sent anytime
+    A needs to be sent before B and C
+    C can only be sent after A and B.
+            Mandatory Implementations
+
+    createCampaign(Campaign campaign)
+    This function is to create and store the campaign.
+    It can only be created if it passes all necessary validations.
+    Also check if the order of sending communication is possible to be followed, else throw necessary exceptions.
+
+    getCampaign(String campaignId)
+    To get the campaign details using campaign Id
+
+    evaluateCampaign(String campaignId)
+    This is to evaluate the campaign and return the order of execution of the communications
+    For above sample example (A, B, C, D), Response will look something like
+[{
+“rank”: 1,
+“communicationId”: “D”
+“channel”: “SMS”
+“message”: “You can do this!”
+},{
+“rank”: 2,
+“communicationId”: “A”
+“channel”: “EMAIL”,
+“subject”: “Easy peasy”
+“message”: “You can do this!”
+},{
+“rank”: 3,
+“communicationId”: “B”
+“channel”: “SMS”
+“message”: “You can do this!”
+},
+{
+“rank”: 4,
+“communicationId”: “C”
+“channel”: “SMS”
+“message”: “You can do this!”
+}]
+
+    Points to note
+
+    All necessary validations must be present.
+    In case of an exception, proper errorCode must be present.
+    Use In Memory database to store the campaign
+    Your code should cover all the mandatory functionalities explained above.
+    Your code should be executable and clean.
+    How will you be evaluated?
+
+    Code should be working.
+    Code readability and testability
+    Separation Of Concerns
+    Object-Oriented concepts.
+    Language proficiency.
+    Proper Algorithm and DS choices
+    SOLID principles
+
+
 # How to run the code
-
-We have provided scripts to execute the code. 
-
-Use `run.sh` if you are Linux/Unix/macOS Operating systems and `run.bat` if you are on Windows.  Both the files run the commands silently and prints only output from the input file `sample_input/input1.txt`. You are supposed to add the input commands in the file from the appropriate problem statement. 
-
-Internally both the scripts run the following commands 
-
- * `mvn clean install -DskipTests assembly:single -q` - This will create a jar file `geektrust.jar` in the `target` folder.
- * `java -jar target/geektrust.jar sample_input/input1.txt` - This will execute the jar file passing in the sample input file as the command line argument
-
- We expect your program to take the location to the text file as parameter. Input needs to be read from a text file, and output should be printed to the console. The text file will contain only commands in the format prescribed by the respective problem.
-
- Use the pom.xml provided along with this project. Please change the main class entry (`<mainClass>com.example.lldRound.Main</mainClass>`) in the pom.xml if your main class has changed.
-
- # Running the code for multiple test cases
-
- Please fill `input1.txt` and `input2.txt` with the input commands and use those files in `run.bat` or `run.sh`. Replace `java -jar target/geektrust.jar sample_input/input1.txt` with `java -jar target/geektrust.jar sample_input/input2.txt` to run the test case from the second file. 
-
- # How to execute the unit tests
-
- `mvn clean test` will execute the unit test cases.
-
-# Help
-
-You can refer our help documents [here](https://help.geektrust.com)
-You can read build instructions [here](https://github.com/geektrust/coding-problem-artefacts/tree/master/Java)
+execute the Main.java file
