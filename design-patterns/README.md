@@ -37,6 +37,9 @@ design-patterns/
     ├── 03-abstract-factory.md
     ├── ...
     └── 20-template-method.md
+    ├── 21-visitor.md
+    ├── 22-memento.md
+    └── 23-interpreter.md
 ```
 
 ## Quick Start
@@ -76,7 +79,7 @@ mvn exec:java -pl design-patterns -Dexec.mainClass="org.designpatterns.Main" -De
 | 11 | **Flyweight** | Share objects to save memory | Text Styles | [Guide](docs/11-flyweight.md) |
 | 12 | **Proxy** | Control access to an object | Image Lazy Loading | [Guide](docs/12-proxy.md) |
 
-### Behavioral Patterns (8) - "How objects communicate"
+### Behavioral Patterns (11) - "How objects communicate"
 
 | # | Pattern | Key Idea | Example | Guide |
 |---|---------|----------|---------|-------|
@@ -88,6 +91,9 @@ mvn exec:java -pl design-patterns -Dexec.mainClass="org.designpatterns.Main" -De
 | 18 | **Mediator** | Centralize complex communication | Chat Room | [Guide](docs/18-mediator.md) |
 | 19 | **State** | Behavior changes with state | Vending Machine | [Guide](docs/19-state.md) |
 | 20 | **Template Method** | Skeleton algorithm, subclass steps | Data Pipeline | [Guide](docs/20-template-method.md) |
+| 21 | **Visitor** | Add operations without modifying classes | Shopping Cart Price/Tax | [Guide](docs/21-visitor.md) |
+| 22 | **Memento** | Capture & restore object state | Text Editor Snapshots | [Guide](docs/22-memento.md) |
+| 23 | **Interpreter** | Define grammar & interpret expressions | Math Expression Evaluator | [Guide](docs/23-interpreter.md) |
 
 ## Interview Cheat Sheet
 
@@ -125,3 +131,6 @@ mvn exec:java -pl design-patterns -Dexec.mainClass="org.designpatterns.Main" -De
 - **Strategy vs Template Method** - Composition vs inheritance
 - **Observer vs Mediator** - Unidirectional vs bidirectional communication
 - **Command vs Strategy** - Request/action with undo vs algorithm replacement
+- **Memento vs Command** - Full state snapshot vs action + inverse action for undo
+- **Visitor vs Strategy** - Operations on multiple types (double dispatch) vs swappable algorithm
+- **Interpreter vs Composite** - Grammar tree evaluation vs uniform part-whole treatment

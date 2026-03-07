@@ -22,6 +22,9 @@ import org.designpatterns.behavioral.iterator.IteratorDemo;
 import org.designpatterns.behavioral.mediator.MediatorDemo;
 import org.designpatterns.behavioral.state.StateDemo;
 import org.designpatterns.behavioral.templatemethod.TemplateMethodDemo;
+import org.designpatterns.behavioral.visitor.VisitorDemo;
+import org.designpatterns.behavioral.memento.MementoDemo;
+import org.designpatterns.behavioral.interpreter.InterpreterDemo;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -63,6 +66,9 @@ public class Main {
         DEMOS.put("mediator", MediatorDemo::run);
         DEMOS.put("state", StateDemo::run);
         DEMOS.put("templatemethod", TemplateMethodDemo::run);
+        DEMOS.put("visitor", VisitorDemo::run);
+        DEMOS.put("memento", MementoDemo::run);
+        DEMOS.put("interpreter", InterpreterDemo::run);
     }
 
     public static void main(String[] args) {
