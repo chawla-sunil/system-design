@@ -12,12 +12,12 @@ Cheat sheets and deep dives on tools, concepts, and technologies every senior en
 |-----|---------------|-----------|
 | [**Maven Interview Cheatsheet**](docs/maven-interview-cheatsheet.md) | Quick-fire: lifecycle, scopes, commands, POM structure, dependency conflicts | 5 min |
 | [**Maven Deep Dive**](docs/maven-deep-dive.md) | Exhaustive: every POM tag, reactor, BOMs, profiles, plugins, settings.xml, troubleshooting | 30 min |
+| [**Git Important Commands**](docs/git-important-commands.md) | All essential commands with examples: rebase, cherry-pick, bisect, reflog, stash, reset, interactive rebase, interview scenarios | 25 min |
 
 ---
 
 ## 🔜 Coming Soon
 
-- Git — Interactive Rebase, Cherry-Pick, Bisect, Reflog (interview favorites)
 - Docker — Dockerfile best practices, multi-stage builds, compose
 - CI/CD — GitHub Actions, Jenkins pipelines
 - Linux — Commands every dev should know
