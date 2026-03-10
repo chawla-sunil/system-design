@@ -1,5 +1,7 @@
 # ❌⭕ Tic-Tac-Toe LLD — Complete Interview Guide
 
+> ✅ **This is the CORRECT interview-ready design.** There is also a [tic-tac-toe2](../tic-tac-toe2/tic-tac-toe2-lld.md) module in this repo — that one is intentionally kept as a **BAD design / anti-pattern reference**. Do NOT use tic-tac-toe2 as a template. Study this module instead.
+
 ---
 
 ## 📁 Final Package Structure
