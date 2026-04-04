@@ -85,7 +85,7 @@ docs/
 
 | Topic | What To Cover |
 |-------|--------------|
-| **Kafka Deep Dive** | Producers, consumers, consumer groups, partitioning, exactly-once semantics, log compaction, Kafka Streams, Connect |
+| **Kafka Deep Dive** | Exhaustive: producers, consumers, consumer groups, partitioning, exactly-once semantics, log compaction, Kafka Streams, Kafka Connect, schema registry |
 | **Event-Driven Architecture** | Event sourcing, CQRS, saga pattern, outbox pattern, eventual consistency patterns |
 
 ### ☁️ Infrastructure & DevOps
