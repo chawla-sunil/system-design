@@ -11,6 +11,7 @@ A comprehensive, **interview-focused** collection of Low-Level Design (LLD) prob
 | Module | Description | Key Patterns | Doc |
 |--------|-------------|-------------|-----|
 | [**design-patterns**](design-patterns/) | 23 GoF design patterns with real-world examples | Singleton, Factory, Strategy, Observer, Builder, etc. | [README](design-patterns/README.md) |
+| [**car-rental-system**](car-rental-system/) | Car Rental System LLD (Zoomcar-style) — luxury fleet, reservation, billing, payment | Strategy, Factory, SOLID layering | [LLD Guide](car-rental-system/car-rental-system-lld.md) |
 | [**parking-lot**](parking-lot/) | Parking Lot LLD — multi-floor, multi-gate, billing | Singleton, Strategy, Observer, Factory | [LLD Guide](parking-lot/parking-lot-lld.md) |
 | [**tic-tac-toe**](tic-tac-toe/) | Tic-Tac-Toe LLD — N×N board, O(1) win detection, undo | Strategy, Factory, Immutable Records | [LLD Guide](tic-tac-toe/tic-tac-toe-lld.md) |
 | [**elevator**](elevator/) | Elevator System LLD — LOOK algorithm, multi-elevator dispatch, concurrency | Strategy, Observer, Singleton, Factory | [LLD Guide](elevator/elevator-lld.md) |
@@ -27,6 +28,9 @@ mvn clean compile
 
 # Run Parking Lot demo
 mvn -pl parking-lot exec:java -Dexec.mainClass="org.systemdesign.parkinglot.Main"
+
+# Run Car Rental System demo
+mvn -pl car-rental-system exec:java -Dexec.mainClass="org.systemdesign.carrentalsystem.Main"
 
 # Run Tic-Tac-Toe demo
 mvn -pl tic-tac-toe exec:java -Dexec.mainClass="org.tictactoe.Main"
@@ -95,6 +99,15 @@ system-design/
 │       ├── structural/              ← Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy
 │       └── behavioral/             ← Strategy, Observer, Command, Chain of Responsibility, etc.
 │
+├── car-rental-system/               ← Car Rental System LLD (Zoomcar-style)
+│   ├── car-rental-system-lld.md     ← Complete interview guide
+│   └── src/main/java/org/systemdesign/carrentalsystem/
+│       ├── model/                   ← Vehicle, Store, Reservation, Bill, Invoice, User
+│       ├── service/                 ← StoreService, VehicleService, ReservationService, PaymentService
+│       ├── strategy/                ← PaymentStrategy (UPI, Card, Cash)
+│       ├── enums/                   ← VehicleCategory, VehicleStatus, PaymentMode, ReservationStatus
+│       └── exception/               ← VehicleNotAvailable, ReservationNotFound, InvalidPayment
+│
 ├── parking-lot/                     ← Parking Lot LLD
 │   ├── parking-lot-lld.md           ← Complete interview guide
 │   └── src/main/java/org/systemdesign/parkinglot/
@@ -143,6 +156,13 @@ system-design/
 ---
 
 ## 📋 LLD Problems Covered
+
+### ✅ Car Rental System (Zoomcar-style)
+- End-to-end booking flow: search vehicle → reserve → bill → pay → invoice
+- Luxury vehicle examples with configurable `VehicleCategory` and status transitions
+- Service-layer separation: store, vehicle inventory, reservation lifecycle, payments
+- Pluggable payment strategies (`UPI`, `CreditCard`, `Cash`) via Strategy pattern
+- [→ Full Interview Guide](car-rental-system/car-rental-system-lld.md)
 
 ### ✅ Parking Lot
 - Multi-floor, multi-gate parking system

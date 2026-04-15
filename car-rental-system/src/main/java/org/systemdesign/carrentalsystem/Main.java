@@ -106,12 +106,12 @@ public class Main {
         // ─────────���──────────────────────────────────────
         User sunil = userService.registerUser("Sunil Chawla", "sunil@example.com",
                 "9876543210", "DL-BLR-2020-12345");
-        User priya = userService.registerUser("Test User", "test@example.com",
+        User testUser = userService.registerUser("Test User", "test@example.com",
                 "9876543211", "DL-MUM-2021-67890");
 
         System.out.println("✅ Step 4: Users registered");
         System.out.println("   " + sunil);
-        System.out.println("   " + priya);
+        System.out.println("   " + testUser);
         System.out.println();
 
         // ────────────────────────────────────────────────
@@ -215,7 +215,7 @@ public class Main {
         LocalDateTime bookEnd2 = bookStart2.plusHours(4);
 
         Reservation reservation2 = reservationService.createReservation(
-                priya, bangaloreStore, mercedesSClass, bookStart2, bookEnd2);
+                testUser, bangaloreStore, mercedesSClass, bookStart2, bookEnd2);
 
         System.out.println("   Reservation created: " + reservation2);
         System.out.println("   Vehicle status: " + mercedesSClass.getStatus());
@@ -250,7 +250,7 @@ public class Main {
             LocalDateTime overlapEnd = overlapStart.plusHours(4);
 
             reservationService.createReservation(
-                    priya, bangaloreStore, rollsRoyceCullinan, overlapStart, overlapEnd);
+                    testUser, bangaloreStore, rollsRoyceCullinan, overlapStart, overlapEnd);
             System.out.println("   ❌ ERROR: This should not have succeeded!");
         } catch (Exception e) {
             System.out.println("   🚫 Double-booking prevented: " + e.getMessage());
@@ -264,12 +264,12 @@ public class Main {
         System.out.println("  📱  Demonstrating UPI Payment (Strategy Pattern)");
         System.out.println("═══════════════════════════════════════════════════════════════\n");
 
-        // Priya books the Porsche 911, goes on a trip, returns, and pays via UPI
+        // Test User books the Porsche 911, goes on a trip, returns, and pays via UPI
         LocalDateTime upiStart = LocalDateTime.now().plusHours(3);
         LocalDateTime upiEnd = upiStart.plusHours(3);
 
         Reservation res4 = reservationService.createReservation(
-                priya, bangaloreStore, porsche911, upiStart, upiEnd);
+                testUser, bangaloreStore, porsche911, upiStart, upiEnd);
         reservationService.startTrip(res4.getId());
         Invoice upiInvoice = reservationService.completeReservation(
                 res4.getId(), upiStart.plusHours(3));
@@ -278,7 +278,7 @@ public class Main {
         Payment upiPayment = paymentService.processPayment(
                 upiInvoice,
                 PaymentMode.UPI,
-                new UpiPayment("priya@upi")
+                new UpiPayment("testUser@upi")
         );
         System.out.println("   " + upiPayment);
         System.out.println();

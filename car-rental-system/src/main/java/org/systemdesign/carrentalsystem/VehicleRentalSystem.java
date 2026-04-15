@@ -13,7 +13,7 @@ import org.systemdesign.carrentalsystem.service.*;
  */
 public class VehicleRentalSystem {
 
-    private static VehicleRentalSystem instance;
+    private static volatile VehicleRentalSystem instance;
 
     private final UserService userService;
     private final StoreService storeService;
@@ -33,7 +33,11 @@ public class VehicleRentalSystem {
 
     public static synchronized VehicleRentalSystem getInstance() {
         if (instance == null) {
-            instance = new VehicleRentalSystem();
+            synchronized (VehicleRentalSystem.class) {
+                if (instance == null) {
+                    instance = new VehicleRentalSystem();
+                }
+            }
         }
         return instance;
     }
