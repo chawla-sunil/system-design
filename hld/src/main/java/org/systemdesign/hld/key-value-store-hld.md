@@ -449,3 +449,157 @@ Saves enormous disk I/O on reads.
 
 *This design is heavily inspired by the Dynamo paper (Amazon, 2007) and is the foundation of systems like Cassandra and Riak.*
 
+---
+
+## 📚 Appendix — Core Concepts Explained
+
+### A. Write-Ahead Log (WAL)
+
+A WAL is an **append-only file on disk** where every write is recorded **before** updating memory.
+
+```
+Client: PUT("name", "Alice")
+  1. Append to WAL on disk:  [PUT | name | Alice | ts=100]   ← durable now
+  2. Update in-memory memtable
+  3. ACK to client
+```
+
+**Why?** If the server crashes after step 1 but before flushing to SSTable, we can **replay the WAL** on restart to recover all writes. It's sequential I/O (fast) — just appending to end of file.
+
+**Think of it as:** A journal/diary that you write in before doing the actual work. If you forget what you were doing, read the diary.
+
+---
+
+### B. Memtable
+
+An **in-memory sorted data structure** (typically a **Red-Black Tree** or **Skip List**) that holds recent writes.
+
+```
+Memtable (in memory, sorted by key):
+  ┌─────────────────────────┐
+  │  "age"    → 30          │
+  │  "city"   → "Delhi"     │
+  │  "name"   → "Alice"     │  ← sorted!
+  │  "zip"    → "110001"    │
+  └─────────────────────────┘
+```
+
+- **Writes** go here first (after WAL) — O(log n) insertion.
+- **Reads** check here first — O(log n) lookup.
+- When it hits a **size threshold** (e.g., 64 MB), it's **flushed to disk** as an immutable SSTable, and a new empty memtable is created.
+- The corresponding WAL is discarded after flush (data is now safely on disk).
+
+---
+
+### C. SSTable (Sorted String Table)
+
+An SSTable is an **immutable, sorted file on disk** containing key-value pairs.
+
+```
+SSTable file on disk:
+┌────────┬────────┬────────┬────────┬──────────────┐
+│ age=30 │city=Del│name=Ali│zip=110 │ Index + Bloom │
+└────────┴────────┴────────┴────────┴──────────────┘
+  ↑ sorted by key                     ↑ metadata block
+```
+
+**Key properties:**
+- **Immutable** — never modified after creation (no random writes to disk)
+- **Sorted** — enables binary search and efficient merging
+- Each SSTable has a **sparse index** (key → offset) for fast lookups
+- Each SSTable has its own **Bloom filter** (see below)
+
+---
+
+### D. SSTable Levels: L0 → L1 → L2 (LSM Tree)
+
+LSM = **Log-Structured Merge Tree**. SSTables are organized into levels:
+
+```
+         ┌─────────────────┐
+         │    Memtable      │  ← newest writes (in memory)
+         └────────┬────────┘
+                  │ flush
+         ┌────────▼────────┐
+Level 0  │ SST-1  SST-2    │  ← recently flushed, may have overlapping key ranges
+         └────────┬────────┘
+                  │ compaction (merge + sort + deduplicate)
+         ┌────────▼────────┐
+Level 1  │ SST-A  SST-B    │  ← non-overlapping key ranges, 10x size of L0
+         └────────┬────────┘
+                  │ compaction
+         ┌────────▼────────┐
+Level 2  │ SST-X  SST-Y    │  ← non-overlapping, 10x size of L1
+         └─────────────────┘
+```
+
+**How compaction works (leveled):**
+1. L0 fills up → pick an SSTable, find overlapping SSTables in L1
+2. **Merge-sort** them together → write new SSTables to L1, delete old ones
+3. Same process L1 → L2 when L1 gets too big
+
+**Why levels?**
+- L0 has overlapping ranges (multiple memtable flushes) → slow reads (must check all)
+- L1+ has **non-overlapping ranges** → only check 1 SSTable per level → fast reads
+- Older/colder data sinks to deeper levels
+
+**Read order:** Memtable → L0 (all SSTables) → L1 (1 SSTable) → L2 (1 SSTable) → ...  
+Stop at the **first match** (newest version wins).
+
+---
+
+### E. Vector Clocks
+
+A **version tracking mechanism** where each node maintains its own counter. It's a map: `{ NodeId → Counter }`.
+
+```
+Step 1: Client writes via Node A
+        VC = {A:1}           value = "v1"
+
+Step 2: Client reads {A:1}, writes update via Node A  
+        VC = {A:2}           value = "v2"
+
+Step 3: Network partition! Two clients write concurrently:
+
+  Client X writes via Node A:    VC = {A:3}        value = "v3"
+  Client Y writes via Node B:    VC = {A:2, B:1}   value = "v4"
+```
+
+**Comparing vector clocks:**
+- `{A:3}` vs `{A:2, B:1}` → **neither dominates** the other
+  - A:3 > A:2 ✓, but B:1 > B:0 (absent) — so they're **concurrent** → CONFLICT
+- `{A:2}` vs `{A:3}` → A:3 dominates → `{A:3}` is strictly newer, no conflict
+
+**Dominance rule:** VC₁ dominates VC₂ if **every** counter in VC₁ ≥ corresponding counter in VC₂, and at least one is strictly greater.
+
+**On conflict:** Either return both versions to the client to resolve (like Amazon's shopping cart), or use **Last-Write-Wins (LWW)** with wall-clock timestamps (simpler but can lose data).
+
+---
+
+### F. Bloom Filter
+
+A **space-efficient probabilistic data structure** that answers: *"Is this key in this SSTable?"*
+
+```
+Bloom Filter = bit array of size m (e.g., 10 bits), with k hash functions
+
+Insert "name":
+  h1("name") = 2,  h2("name") = 5,  h3("name") = 8
+  Set bits 2, 5, 8 to 1:
+
+  Bit array: [0, 0, 1, 0, 0, 1, 0, 0, 1, 0]
+                    ↑           ↑        ↑
+
+Query "name":  check bits 2, 5, 8 → all 1 → "MAYBE present" ✓
+Query "age":   h1("age")=1, h2("age")=5, h3("age")=7
+               check bits 1, 5, 7 → bit 1 is 0 → "DEFINITELY NOT present" ✗
+```
+
+| Answer | Meaning |
+|---|---|
+| **"No"** | Key is **definitely not** in this SSTable → skip it (100% accurate) |
+| **"Yes"** | Key **might** be in this SSTable → check it (small false positive rate ~1%) |
+
+**Impact:** Without Bloom filters, a read for a missing key would scan **every SSTable** on disk. With Bloom filters, we skip 99% of them → massive I/O savings.
+
+**Size:** ~10 bits per key. For 1M keys = ~1.2 MB per SSTable. Tiny cost for huge speedup.
