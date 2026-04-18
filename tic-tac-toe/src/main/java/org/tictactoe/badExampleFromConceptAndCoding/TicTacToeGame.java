@@ -1,6 +1,6 @@
-package org.tictactoe2;
+package org.tictactoe.badExampleFromConceptAndCoding;
 
-import org.tictactoe2.model.*;
+import org.tictactoe.badExampleFromConceptAndCoding.model.*;
 
 import java.util.Deque;
 import java.util.LinkedList;

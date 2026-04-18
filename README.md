@@ -16,7 +16,6 @@ A comprehensive, **interview-focused** collection of Low-Level Design (LLD) and 
 | [**tic-tac-toe**](tic-tac-toe/) | Tic-Tac-Toe LLD — N×N board, O(1) win detection, undo | Strategy, Factory, Immutable Records | [LLD Guide](tic-tac-toe/tic-tac-toe-lld.md) |
 | [**elevator**](elevator/) | Elevator System LLD — LOOK algorithm, multi-elevator dispatch, concurrency | Strategy, Observer, Singleton, Factory | [LLD Guide](elevator/elevator-lld.md) |
 | [**snake-and-ladder**](snake-and-ladder/) | Snake and Ladder LLD — board entities, turn-based flow, dice-driven transitions | Strategy-ready orchestration, queue-based turns | [LLD Guide](snake-and-ladder/snake-and-ladder-lld.md) |
-| [**tic-tac-toe2**](tic-tac-toe2/) | ⚠️ Tic-Tac-Toe — **BAD design** kept as anti-pattern reference | God Class, No Patterns | [Anti-Pattern Guide](tic-tac-toe2/tic-tac-toe2-lld.md) |
 | [**hld**](hld/) | High-Level Design case studies and architecture walkthroughs | Scalability, partitioning, consistency trade-offs | [HLD Docs](hld/src/main/java/org/systemdesign/hld/) |
 | [**engineering-fundamentals**](engineering-fundamentals/) | Maven, Git, Docker, CI/CD — tools & concepts cheat sheets | — | [README](engineering-fundamentals/README.md) |
 
@@ -151,12 +150,6 @@ system-design/
 │       ├── model/                   ← Board, BoardEntity, BoardEntityType, Dice, Player
 │       └── service/                 ← GameService
 │
-├── tic-tac-toe2/                    ← ⚠️ Tic-Tac-Toe (BAD design — anti-pattern reference)
-│   ├── tic-tac-toe2-lld.md          ← What NOT to do guide
-│   └── src/main/java/org/tictactoe2/
-│       ├── model/                   ← Board, Player, PlayingPiece, GameStatus
-│       └── TicTacToeGame.java       ← God class — game logic + I/O + win check all in one
-│
 ├── hld/                             ← High-Level Design case studies
 │   └── src/main/java/org/systemdesign/hld/
 │       ├── url-shortener-hld.md     ← URL Shortener architecture deep dive
@@ -209,14 +202,6 @@ system-design/
 - Exact-win and overshoot handling with optional extra turn on rolling 6
 - Clean separation: Board/Entity models + GameService orchestration
 - [→ Full Interview Guide](snake-and-ladder/snake-and-ladder-lld.md)
-
-### ⚠️ Tic-Tac-Toe 2 (Anti-Pattern — What NOT to Do)
-- Intentionally kept as a **BAD design** reference — do NOT use this as a template
-- God class (`TicTacToeGame`) does game logic + win detection + console I/O in one file
-- O(N) win detection (scans rows/cols) vs O(1) counters in tic-tac-toe
-- Public fields, unnecessary inheritance, no patterns, no undo, no testability
-- **Study this to understand what interviewers will reject** — then study [tic-tac-toe](tic-tac-toe/tic-tac-toe-lld.md) for how to do it right
-- [→ Full Anti-Pattern Guide](tic-tac-toe2/tic-tac-toe2-lld.md)
 
 ## 🏗️ HLD Topics Covered
 

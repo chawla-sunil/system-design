@@ -1,4 +1,4 @@
-package org.tictactoe2.model;
+package org.tictactoe.badExampleFromConceptAndCoding.model;
 
 import java.util.ArrayList;
 import java.util.List;

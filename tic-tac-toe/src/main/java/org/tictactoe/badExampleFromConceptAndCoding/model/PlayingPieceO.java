@@ -1,4 +1,4 @@
-package org.tictactoe2.model;
+package org.tictactoe.badExampleFromConceptAndCoding.model;
 
 public class PlayingPieceO extends PlayingPiece {
 

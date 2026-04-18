@@ -1,6 +1,6 @@
 # ❌⭕ Tic-Tac-Toe 2 — LLD Anti-Pattern Guide (What NOT to Do)
 
-> ⚠️ **WARNING:** This module is an example of a **BAD** LLD design. It is kept here intentionally as a "what NOT to do" reference. For the correct, interview-ready approach, see [**tic-tac-toe**](../tic-tac-toe/tic-tac-toe-lld.md).
+> ⚠️ **WARNING:** This module is an example of a **BAD** LLD design. It is kept here intentionally as a "what NOT to do" reference. For the correct, interview-ready approach, see [**tic-tac-toe**](../../../../../../tic-tac-toe-lld.md).
 
 ---
 
@@ -267,13 +267,13 @@ This module exists to teach you **what interviewers DON'T want to see**:
 6. ❌ **No patterns** — you're expected to use Strategy, Factory, Observer where appropriate
 7. ❌ **No extensibility story** — "how would you add X?" should never require a rewrite
 
-> **Bottom line:** tic-tac-toe2 would get a "not hire" in an LLD interview. [tic-tac-toe](../tic-tac-toe/tic-tac-toe-lld.md) would get a "strong hire."
+> **Bottom line:** tic-tac-toe2 would get a "not hire" in an LLD interview. [tic-tac-toe](../../../../../../tic-tac-toe-lld.md) would get a "strong hire."
 
 ---
 
 ## ➡️ What to Study Instead
 
-Go to [**tic-tac-toe/tic-tac-toe-lld.md**](../tic-tac-toe/tic-tac-toe-lld.md) for:
+Go to [**tic-tac-toe/tic-tac-toe-lld.md**](../../../../../../tic-tac-toe-lld.md) for:
 - ✅ Proper clarifying questions
 - ✅ O(1) win detection algorithm
 - ✅ Strategy, Factory, Immutable Records patterns

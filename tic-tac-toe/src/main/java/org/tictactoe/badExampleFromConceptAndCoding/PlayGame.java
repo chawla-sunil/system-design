@@ -1,6 +1,6 @@
-package org.tictactoe2;
+package org.tictactoe.badExampleFromConceptAndCoding;
 
-import org.tictactoe2.model.GameStatus;
+import org.tictactoe.badExampleFromConceptAndCoding.model.GameStatus;
 
 public class PlayGame {
 
