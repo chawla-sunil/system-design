@@ -3,22 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.systemdesign</groupId>
+        <artifactId>systemdesign</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
-    <groupId>org.systemdesign</groupId>
-    <artifactId>systemdesign</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>parking-lot</module>
-        <module>design-patterns</module>
-        <module>tic-tac-toe</module>
-        <module>engineering-fundamentals</module>
-        <module>tic-tac-toe2</module>
-        <module>elevator</module>
-        <module>hld</module>
-        <module>car-rental-system</module>
-        <module>snake-and-ladder</module>
-    </modules>
+    <groupId>org.systemdesign.snakeandladder</groupId>
+    <artifactId>snake-and-ladder</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
