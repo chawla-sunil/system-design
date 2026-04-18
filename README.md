@@ -1,6 +1,6 @@
 # 🏗️ System Design — Interview Preparation Repository
 
-A comprehensive, **interview-focused** collection of Low-Level Design (LLD) problems and Design Patterns, implemented in **Java 17** with Maven.
+A comprehensive, **interview-focused** collection of Low-Level Design (LLD) and High-Level Design (HLD) problems plus Design Patterns, implemented in **Java 17** with Maven.
 
 > **Goal:** Walk into any LLD / Machine Coding interview with a mental framework — know what questions to ask, how to think about the problem, which patterns to apply, and how to present your solution.
 
@@ -15,7 +15,9 @@ A comprehensive, **interview-focused** collection of Low-Level Design (LLD) prob
 | [**parking-lot**](parking-lot/) | Parking Lot LLD — multi-floor, multi-gate, billing | Singleton, Strategy, Observer, Factory | [LLD Guide](parking-lot/parking-lot-lld.md) |
 | [**tic-tac-toe**](tic-tac-toe/) | Tic-Tac-Toe LLD — N×N board, O(1) win detection, undo | Strategy, Factory, Immutable Records | [LLD Guide](tic-tac-toe/tic-tac-toe-lld.md) |
 | [**elevator**](elevator/) | Elevator System LLD — LOOK algorithm, multi-elevator dispatch, concurrency | Strategy, Observer, Singleton, Factory | [LLD Guide](elevator/elevator-lld.md) |
+| [**snake-and-ladder**](snake-and-ladder/) | Snake and Ladder LLD — board entities, turn-based flow, dice-driven transitions | Strategy-ready orchestration, queue-based turns | [LLD Guide](snake-and-ladder/snake-and-ladder-lld.md) |
 | [**tic-tac-toe2**](tic-tac-toe2/) | ⚠️ Tic-Tac-Toe — **BAD design** kept as anti-pattern reference | God Class, No Patterns | [Anti-Pattern Guide](tic-tac-toe2/tic-tac-toe2-lld.md) |
+| [**hld**](hld/) | High-Level Design case studies and architecture walkthroughs | Scalability, partitioning, consistency trade-offs | [HLD Docs](hld/src/main/java/org/systemdesign/hld/) |
 | [**engineering-fundamentals**](engineering-fundamentals/) | Maven, Git, Docker, CI/CD — tools & concepts cheat sheets | — | [README](engineering-fundamentals/README.md) |
 
 ---
@@ -37,6 +39,9 @@ mvn -pl tic-tac-toe exec:java -Dexec.mainClass="org.tictactoe.Main"
 
 # Run Elevator System demo
 mvn -pl elevator exec:java -Dexec.mainClass="org.systemdesign.elevator.Main"
+
+# Run Snake and Ladder demo
+mvn -pl snake-and-ladder exec:java -Dexec.mainClass="org.systemdesign.snakeandladder.Main"
 
 # Run Design Patterns demo
 mvn -pl design-patterns exec:java -Dexec.mainClass="org.designpatterns.Main"
@@ -140,11 +145,23 @@ system-design/
 │       ├── service/                 ← ElevatorController, ElevatorService (LOOK algorithm)
 │       └── exception/               ← InvalidFloor, Overweight, Maintenance, AllUnavailable
 │
+├── snake-and-ladder/                ← Snake and Ladder LLD
+│   ├── snake-and-ladder-lld.md      ← Complete interview guide
+│   └── src/main/java/org/systemdesign/snakeandladder/
+│       ├── model/                   ← Board, BoardEntity, BoardEntityType, Dice, Player
+│       └── service/                 ← GameService
+│
 ├── tic-tac-toe2/                    ← ⚠️ Tic-Tac-Toe (BAD design — anti-pattern reference)
 │   ├── tic-tac-toe2-lld.md          ← What NOT to do guide
 │   └── src/main/java/org/tictactoe2/
 │       ├── model/                   ← Board, Player, PlayingPiece, GameStatus
 │       └── TicTacToeGame.java       ← God class — game logic + I/O + win check all in one
+│
+├── hld/                             ← High-Level Design case studies
+│   └── src/main/java/org/systemdesign/hld/
+│       ├── url-shortener-hld.md     ← URL Shortener architecture deep dive
+│       ├── key-value-store-hld.md   ← Key-Value Store architecture deep dive
+│       └── unique-id-generator-hld.md ← Unique ID Generator architecture deep dive
 │
 └── engineering-fundamentals/        ← Tools & concepts cheat sheets
     ├── README.md
@@ -186,6 +203,13 @@ system-design/
 - Two request types: External (floor button) vs Internal (elevator button)
 - [→ Full Interview Guide](elevator/elevator-lld.md)
 
+### ✅ Snake and Ladder
+- Turn-based multiplayer game flow with queue-driven scheduling
+- Configurable board with snakes/ladders modeled as board entities
+- Exact-win and overshoot handling with optional extra turn on rolling 6
+- Clean separation: Board/Entity models + GameService orchestration
+- [→ Full Interview Guide](snake-and-ladder/snake-and-ladder-lld.md)
+
 ### ⚠️ Tic-Tac-Toe 2 (Anti-Pattern — What NOT to Do)
 - Intentionally kept as a **BAD design** reference — do NOT use this as a template
 - God class (`TicTacToeGame`) does game logic + win detection + console I/O in one file
@@ -194,9 +218,14 @@ system-design/
 - **Study this to understand what interviewers will reject** — then study [tic-tac-toe](tic-tac-toe/tic-tac-toe-lld.md) for how to do it right
 - [→ Full Anti-Pattern Guide](tic-tac-toe2/tic-tac-toe2-lld.md)
 
+## 🏗️ HLD Topics Covered
+
+- [URL Shortener](hld/src/main/java/org/systemdesign/hld/url-shortener-hld.md)
+- [Key-Value Store](hld/src/main/java/org/systemdesign/hld/key-value-store-hld.md)
+- [Unique ID Generator](hld/src/main/java/org/systemdesign/hld/unique-id-generator-hld.md)
+
 ### 🔜 Coming Soon
 - BookMyShow / Movie Ticket Booking
-- Snake & Ladder
 - Chess
 - Library Management System
 - Splitwise
