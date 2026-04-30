@@ -18,6 +18,7 @@
         <module>car-rental-system</module>
         <module>snake-and-ladder</module>
         <module>extra</module>
+        <module>movie-ticket-booking</module>
     </modules>
 
     <properties>
