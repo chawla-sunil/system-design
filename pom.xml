@@ -19,6 +19,7 @@
         <module>snake-and-ladder</module>
         <module>extra</module>
         <module>movie-ticket-booking</module>
+        <module>vending-machine</module>
     </modules>
 
     <properties>
