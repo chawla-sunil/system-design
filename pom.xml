@@ -21,6 +21,7 @@
         <module>movie-ticket-booking</module>
         <module>vending-machine</module>
         <module>atm</module>
+        <module>chess</module>
     </modules>
 
     <properties>
