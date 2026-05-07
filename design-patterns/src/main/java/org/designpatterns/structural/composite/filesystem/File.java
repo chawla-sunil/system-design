@@ -1,4 +1,4 @@
-package org.designpatterns.structural.composite;
+package org.designpatterns.structural.composite.filesystem;
 
 public class File implements FileSystemComponent {
     private final String name;

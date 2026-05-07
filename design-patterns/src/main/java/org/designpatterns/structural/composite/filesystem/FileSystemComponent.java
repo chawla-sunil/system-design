@@ -1,4 +1,4 @@
-package org.designpatterns.structural.composite;
+package org.designpatterns.structural.composite.filesystem;
 
 public interface FileSystemComponent {
     String getName();
