@@ -41,34 +41,34 @@ public class Main {
     private static final Map<String, Runnable> DEMOS = new LinkedHashMap<>();
 
     static {
-//        // Creational Patterns
-//        DEMOS.put("singleton", SingletonDemo::run);
-//        DEMOS.put("factory", FactoryMethodDemo::run);
-//        DEMOS.put("abstractfactory", AbstractFactoryDemo::run);
-//        DEMOS.put("builder", BuilderDemo::run);
-//        DEMOS.put("prototype", PrototypeDemo::run);
-//
-//        // Structural Patterns
-//        DEMOS.put("adapter", AdapterDemo::run);
-//        DEMOS.put("bridge", BridgeDemo::run);
+        // Creational Patterns
+        DEMOS.put("singleton", SingletonDemo::run);
+        DEMOS.put("factory", FactoryMethodDemo::run);
+        DEMOS.put("abstractfactory", AbstractFactoryDemo::run);
+        DEMOS.put("builder", BuilderDemo::run);
+        DEMOS.put("prototype", PrototypeDemo::run);
+
+        // Structural Patterns
+        DEMOS.put("adapter", AdapterDemo::run);
+        DEMOS.put("bridge", BridgeDemo::run);
         DEMOS.put("composite", CompositeDemo::run);
-//        DEMOS.put("decorator", DecoratorDemo::run);
-//        DEMOS.put("facade", FacadeDemo::run);
-//        DEMOS.put("flyweight", FlyweightDemo::run);
-//        DEMOS.put("proxy", ProxyDemo::run);
-//
-//        // Behavioral Patterns
-//        DEMOS.put("strategy", StrategyDemo::run);
-//        DEMOS.put("observer", ObserverDemo::run);
-//        DEMOS.put("command", CommandDemo::run);
-//        DEMOS.put("chain", ChainOfResponsibilityDemo::run);
-//        DEMOS.put("iterator", IteratorDemo::run);
-//        DEMOS.put("mediator", MediatorDemo::run);
-//        DEMOS.put("state", StateDemo::run);
-//        DEMOS.put("templatemethod", TemplateMethodDemo::run);
-//        DEMOS.put("visitor", VisitorDemo::run);
-//        DEMOS.put("memento", MementoDemo::run);
-//        DEMOS.put("interpreter", InterpreterDemo::run);
+        DEMOS.put("decorator", DecoratorDemo::run);
+        DEMOS.put("facade", FacadeDemo::run);
+        DEMOS.put("flyweight", FlyweightDemo::run);
+        DEMOS.put("proxy", ProxyDemo::run);
+
+        // Behavioral Patterns
+        DEMOS.put("strategy", StrategyDemo::run);
+        DEMOS.put("observer", ObserverDemo::run);
+        DEMOS.put("command", CommandDemo::run);
+        DEMOS.put("chain", ChainOfResponsibilityDemo::run);
+        DEMOS.put("iterator", IteratorDemo::run);
+        DEMOS.put("mediator", MediatorDemo::run);
+        DEMOS.put("state", StateDemo::run);
+        DEMOS.put("templatemethod", TemplateMethodDemo::run);
+        DEMOS.put("visitor", VisitorDemo::run);
+        DEMOS.put("memento", MementoDemo::run);
+        DEMOS.put("interpreter", InterpreterDemo::run);
     }
 
     public static void main(String[] args) {
