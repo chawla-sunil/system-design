@@ -23,6 +23,7 @@
         <module>atm</module>
         <module>chess</module>
         <module>splitwise</module>
+        <module>warehouse-management-system</module>
     </modules>
 
     <properties>
