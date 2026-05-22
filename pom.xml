@@ -24,6 +24,7 @@
         <module>chess</module>
         <module>splitwise</module>
         <module>warehouse-management-system</module>
+        <module>payment-gateway</module>
     </modules>
 
     <properties>
