@@ -14,6 +14,7 @@ A growing collection of 1-hour HLD interview simulations, each written from the 
 | 6 | Consistent Hashing | [`consistent-hashing.md`](./consistent-hashing.md) |
 | 7 | Designing Idempotent APIs | [`idempotency.md`](./idempotency.md) |
 | 8 | Database Indexing (B+Tree, LSM, GIN, BRIN, query planning) | [`database-indexing.md`](./database-indexing.md) |
+| 9 | Concurrency Control — Optimistic & Pessimistic Locking | [`concurrency-control-distributed-systems.md`](./concurrency-control-distributed-systems.md) |
 
 ## How to Use
 
