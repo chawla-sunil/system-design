@@ -305,4 +305,3 @@ This is the **most important interview section.**
 9. **Polyglot persistence:** right DB for each job (Mongo/ES/MySQL/Redis/Cassandra).
 
 ---
-*Referenced related CodeKarle videos: Netflix (ML recos), Airbnb (User Service), Google Maps (serviceability graph), Notification Service.*
