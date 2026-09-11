@@ -1,0 +1,20 @@
+# Hold reaper (background, idempotent) — railway reservation platform
+# Render: d2 zluri-reaper.d2 zluri-reaper.svg
+shape: sequence_diagram
+
+J:  Reaper Job (cron)
+DB: Inventory DB
+MQ: Event Bus
+R:  Redis
+
+J -> DB: SELECT pnr WHERE status=HOLD AND hold_expiry < now()\nFOR UPDATE SKIP LOCKED
+
+per expired hold: {
+  J -> DB: BEGIN TxN
+  J -> DB: UPDATE segment_availability +n over [src,dst)
+  J -> DB: clear occupied_bitmask bits for freed seats
+  J -> DB: UPDATE pnr HOLD -> EXPIRED
+  J -> DB: COMMIT
+  J -> MQ: publish HoldReleased
+  MQ -> R: refresh availability cache
+}

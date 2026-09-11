@@ -1,0 +1,27 @@
+# Search flow — railway reservation platform
+# Render: d2 zluri-search.d2 zluri-search.svg
+shape: sequence_diagram
+
+C:  Client
+GW: API Gateway
+S:  Search Svc
+R:  Redis (avail cache)
+DB: Read Replica (metadata/inventory)
+
+C -> GW: GET /v1/search?src&dst&date&class
+GW -> S: forward (auth, rate-limit)
+S -> DB: resolve trains for src<dst running on date\n(precomputed station_pair->trains index)
+
+per candidate train+class: {
+  S -> R: GET avail:{train}:{date}:{class}
+  cache hit: {
+    R -> S: per-segment counts
+  }
+  cache miss: {
+    S -> DB: MIN(available_count) over [src_seq, dst_seq)
+    DB -> S: counts
+    S -> R: SET avail:{...} (short TTL)
+  }
+  S -> DB: fare(train, class, src_seq, dst_seq)
+}
+S -> C: [{train, dep, arr, class, availableSeats, fare, status}]

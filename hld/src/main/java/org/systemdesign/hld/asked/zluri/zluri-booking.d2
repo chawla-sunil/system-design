@@ -1,0 +1,54 @@
+# Booking flow (soft-HOLD -> pay -> confirm) — railway reservation platform
+# Render: d2 zluri-booking.d2 zluri-booking.svg
+shape: sequence_diagram
+
+C:   Client
+GW:  API Gateway
+B:   Booking Svc
+DB:  Inventory DB (shard: train+date)
+PAY: Payment Svc
+MQ:  Event Bus
+R:   Redis (avail cache)
+
+C -> GW: POST /v1/bookings (Idempotency-Key)
+GW -> B: forward
+B -> DB: SELECT pnr BY idempotency_key
+
+already exists: {
+  DB -> B: existing PNR
+  B -> C: return existing PNR (idempotent)
+}
+
+new request: {
+  B -> DB: BEGIN TxN
+  B -> DB: UPDATE segment_availability -n\nWHERE segment in [src,dst) AND available_count >= n
+
+  insufficient (rows_affected != dst-src): {
+    B -> DB: ROLLBACK
+    B -> C: 409 NO_AVAILABILITY / WAITLIST
+  }
+
+  guard passed: {
+    B -> DB: allocate seat(s): occupied_bitmask & mask == 0 -> set bits
+    B -> DB: INSERT pnr(status=HOLD, hold_expiry), passenger rows
+    B -> DB: COMMIT
+    B -> C: 200 { pnr, status: HOLD, seats, holdExpiry }
+
+    C -> GW: POST /v1/bookings/{pnr}/pay
+    GW -> B: forward
+    B -> PAY: charge
+
+    payment success: {
+      PAY -> B: OK
+      B -> DB: UPDATE pnr HOLD -> CONFIRMED
+      B -> MQ: publish BookingConfirmed (outbox)
+      MQ -> R: invalidate/refresh avail:{train}:{date}:{class}
+      B -> C: 200 CONFIRMED (PNR + seats)
+    }
+    payment fail/timeout: {
+      PAY -> B: FAIL
+      B -> C: 402 PAYMENT_FAILED
+      B -> DB: reaper later: HOLD expired ->\nrestore counts, free seat bits, PNR -> EXPIRED
+    }
+  }
+}
