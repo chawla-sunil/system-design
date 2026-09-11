@@ -15,6 +15,7 @@ A comprehensive, **interview-focused** collection of Low-Level Design (LLD) and 
 | [**parking-lot**](parking-lot/) | Parking Lot LLD — multi-floor, multi-gate, billing | Singleton, Strategy, Observer, Factory | [LLD Guide](parking-lot/parking-lot-lld.md) |
 | [**tic-tac-toe**](tic-tac-toe/) | Tic-Tac-Toe LLD — N×N board, O(1) win detection, undo | Strategy, Factory, Immutable Records | [LLD Guide](tic-tac-toe/tic-tac-toe-lld.md) |
 | [**elevator**](elevator/) | Elevator System LLD — LOOK algorithm, multi-elevator dispatch, concurrency | Strategy, Observer, Singleton, Factory | [LLD Guide](elevator/elevator-lld.md) |
+| [**job-scheduler-system**](job-scheduler-system/) | Job Scheduler LLD — triggers, retries, state machines, leases, bounded execution | Command, Strategy, Repository, Observer | [LLD Guide](job-scheduler-system/job-scheduler-system-lld.md) |
 | [**snake-and-ladder**](snake-and-ladder/) | Snake and Ladder LLD — board entities, turn-based flow, dice-driven transitions | Strategy-ready orchestration, queue-based turns | [LLD Guide](snake-and-ladder/snake-and-ladder-lld.md) |
 | [**hld**](hld/) | High-Level Design case studies and architecture walkthroughs | Scalability, partitioning, consistency trade-offs | [HLD Docs](hld/src/main/java/org/systemdesign/hld/) |
 | [**engineering-fundamentals**](engineering-fundamentals/) | Maven, Git, Docker, CI/CD — tools & concepts cheat sheets | — | [README](engineering-fundamentals/README.md) |
@@ -144,6 +145,9 @@ system-design/
 │       ├── service/                 ← ElevatorController, ElevatorService (LOOK algorithm)
 │       └── exception/               ← InvalidFloor, Overweight, Maintenance, AllUnavailable
 │
+├── job-scheduler-system/            ← Job Scheduler System LLD
+│   └── job-scheduler-system-lld.md  ← Standalone object-oriented interview guide
+│
 ├── snake-and-ladder/                ← Snake and Ladder LLD
 │   ├── snake-and-ladder-lld.md      ← Complete interview guide
 │   └── src/main/java/org/systemdesign/snakeandladder/
@@ -154,7 +158,9 @@ system-design/
 │   └── src/main/java/org/systemdesign/hld/
 │       ├── url-shortener-hld.md     ← URL Shortener architecture deep dive
 │       ├── key-value-store-hld.md   ← Key-Value Store architecture deep dive
-│       └── unique-id-generator-hld.md ← Unique ID Generator architecture deep dive
+│       ├── unique-id-generator-hld.md ← Unique ID Generator architecture deep dive
+│       ├── artifact-repository-hld.md ← Artifact Repository (JFrog-like) interview guide
+│       └── job-scheduler-system-hld.md ← Distributed Job Scheduler interview guide
 │
 └── engineering-fundamentals/        ← Tools & concepts cheat sheets
     ├── README.md
@@ -196,6 +202,15 @@ system-design/
 - Two request types: External (floor button) vs Internal (elevator button)
 - [→ Full Interview Guide](elevator/elevator-lld.md)
 
+### ✅ Job Scheduler System
+- One-time, fixed-rate, and cron triggers with explicit time-zone behavior
+- Separate schedule, logical run, and execution attempt models
+- Atomic claiming with leases and fencing tokens for multi-instance execution
+- Bounded worker pool, retries, timeout, cancellation, misfire, and overlap policies
+- Command, Strategy, Repository, Observer, and dependency-injection patterns
+- [→ Full LLD Interview Guide](job-scheduler-system/job-scheduler-system-lld.md)
+- [→ Full HLD Interview Guide](hld/src/main/java/org/systemdesign/hld/job-scheduler-system-hld.md)
+
 ### ✅ Snake and Ladder
 - Turn-based multiplayer game flow with queue-driven scheduling
 - Configurable board with snakes/ladders modeled as board entities
@@ -208,6 +223,8 @@ system-design/
 - [URL Shortener](hld/src/main/java/org/systemdesign/hld/url-shortener-hld.md)
 - [Key-Value Store](hld/src/main/java/org/systemdesign/hld/key-value-store-hld.md)
 - [Unique ID Generator](hld/src/main/java/org/systemdesign/hld/unique-id-generator-hld.md)
+- [Job Scheduler System](hld/src/main/java/org/systemdesign/hld/job-scheduler-system-hld.md)
+- [Artifact Repository (JFrog-like)](hld/src/main/java/org/systemdesign/hld/artifact-repository-hld.md)
 
 ### 🔜 Coming Soon
 - BookMyShow / Movie Ticket Booking
