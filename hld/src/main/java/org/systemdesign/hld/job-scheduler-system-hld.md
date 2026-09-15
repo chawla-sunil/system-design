@@ -829,7 +829,7 @@ sequenceDiagram
     participant X as Target
 
     S->>TI: Read due entries for owned shard
-    S->>DB: Insert occurrence + attempt + outbox; advance nextFireAt
+    S->>DB: Insert occurrence + attempt + outbox and advance nextFireAt
     DB-->>S: Commit
     R->>DB: Read dispatch outbox
     R->>Q: Publish attempt

@@ -15,6 +15,7 @@ A growing collection of 1-hour HLD interview simulations, each written from the 
 | 7 | Designing Idempotent APIs | [`idempotency.md`](./idempotency.md) |
 | 8 | Database Indexing (B+Tree, LSM, GIN, BRIN, query planning) | [`database-indexing.md`](./database-indexing.md) |
 | 9 | Concurrency Control — Optimistic & Pessimistic Locking | [`concurrency-control-distributed-systems.md`](./concurrency-control-distributed-systems.md) |
+| 10 | Top-N Leaderboard over Rolling Windows (45-min mock) | [`../src/main/java/org/systemdesign/hld/top-n-leaderboard-rolling-windows.md`](../src/main/java/org/systemdesign/hld/top-n-leaderboard-rolling-windows.md) |
 
 ## How to Use
 
@@ -29,4 +30,5 @@ A growing collection of 1-hour HLD interview simulations, each written from the 
 - `microservices-design-patterns.md` references `distributed-transactions.md` and `idempotency.md`.
 - `consistent-hashing.md` complements `distributed-cache-and-caching-strategies.md` (used by Memcached/Cassandra/DynamoDB).
 - `cap-theorem.md` underpins decisions in `distributed-transactions.md` and `microservices-design-patterns.md`.
+- `../src/main/java/org/systemdesign/hld/top-n-leaderboard-rolling-windows.md` is a full 45-min mock round (not a topic doc); it applies `consistent-hashing.md` (partitioning) and `idempotency.md` (event dedup).
 

@@ -15,7 +15,7 @@ A comprehensive, **interview-focused** collection of Low-Level Design (LLD) and 
 | [**parking-lot**](parking-lot/) | Parking Lot LLD — multi-floor, multi-gate, billing | Singleton, Strategy, Observer, Factory | [LLD Guide](parking-lot/parking-lot-lld.md) |
 | [**tic-tac-toe**](tic-tac-toe/) | Tic-Tac-Toe LLD — N×N board, O(1) win detection, undo | Strategy, Factory, Immutable Records | [LLD Guide](tic-tac-toe/tic-tac-toe-lld.md) |
 | [**elevator**](elevator/) | Elevator System LLD — LOOK algorithm, multi-elevator dispatch, concurrency | Strategy, Observer, Singleton, Factory | [LLD Guide](elevator/elevator-lld.md) |
-| [**job-scheduler-system**](job-scheduler-system/) | Job Scheduler LLD — triggers, retries, state machines, leases, bounded execution | Command, Strategy, Repository, Observer | [LLD Guide](job-scheduler-system/job-scheduler-system-lld.md) |
+| [**job-scheduler-system**](job-scheduler-system/) | Job Scheduler LLD — triggers, retries, state machines, leases, bounded execution | Command, Strategy, Repository, Observer | [LLD Guide](hld/src/main/java/org/systemdesign/hld/job-scheduler-system-lld.md) |
 | [**snake-and-ladder**](snake-and-ladder/) | Snake and Ladder LLD — board entities, turn-based flow, dice-driven transitions | Strategy-ready orchestration, queue-based turns | [LLD Guide](snake-and-ladder/snake-and-ladder-lld.md) |
 | [**hld**](hld/) | High-Level Design case studies and architecture walkthroughs | Scalability, partitioning, consistency trade-offs | [HLD Docs](hld/src/main/java/org/systemdesign/hld/) |
 | [**engineering-fundamentals**](engineering-fundamentals/) | Maven, Git, Docker, CI/CD — tools & concepts cheat sheets | — | [README](engineering-fundamentals/README.md) |
@@ -208,7 +208,7 @@ system-design/
 - Atomic claiming with leases and fencing tokens for multi-instance execution
 - Bounded worker pool, retries, timeout, cancellation, misfire, and overlap policies
 - Command, Strategy, Repository, Observer, and dependency-injection patterns
-- [→ Full LLD Interview Guide](job-scheduler-system/job-scheduler-system-lld.md)
+- [→ Full LLD Interview Guide](hld/src/main/java/org/systemdesign/hld/job-scheduler-system-lld.md)
 - [→ Full HLD Interview Guide](hld/src/main/java/org/systemdesign/hld/job-scheduler-system-hld.md)
 
 ### ✅ Snake and Ladder
